@@ -7,7 +7,7 @@ CREATE table menbert(
     mno int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     mname varchar(20),
     mjointime date,
-    mleavetime date,
+    mleavetime date
 );
 /* 乐队表 */
 -- 每个乐队的领队唯一
@@ -16,7 +16,7 @@ CREATE table bandt(
     bname varchar(30),
     bfound date,
     bleader int UNIQUE,
-    FOREIGN KEY(bleader) REFERENCES menbert(mno),
+    FOREIGN KEY(bleader) REFERENCES menbert(mno)
 );
 /* 专辑表 */
 CREATE table albumt(
@@ -40,7 +40,7 @@ CREATE table fanst(
     fsex char(10),
     fage INT CHECK(fage>=000 AND fage<=200)
 );
--- 下为关系表
+-- 下为关系表 --------------------------------------------------------------
 /* 演奏表 */
 -- 歌曲和乐队也是多对多关系
 CREATE table playst(
@@ -52,8 +52,8 @@ CREATE table playst(
 /* 乐队成员表 */
 -- 每个乐队成员同一时期只能加入一支乐队
 CREATE table bandmenbert(
-    bno int UNIQUE,
-    mno int,
+    bno int ,
+    mno int UNIQUE,
     FOREIGN KEY(bno) REFERENCES bandt(bno),
     FOREIGN KEY(mno) REFERENCES menbert(mno)
 );
