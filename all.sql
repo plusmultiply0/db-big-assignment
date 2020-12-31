@@ -6,15 +6,15 @@ USE banddb;
 CREATE table menbert(
     mno int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     mname varchar(20),
-    mjointime date(4) between '1800-01-01' and '9999-12-31',
-    mleavetime date(4) between '1800-01-01' and '9999-12-31',
+    mjointime date,
+    mleavetime date,
 );
 /* 乐队表 */
 -- 每个乐队的领队唯一
 CREATE table bandt(
     bno int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     bname varchar(30),
-    bfound date(4) between '1800-01-01' and '9999-12-31',
+    bfound date,
     bleader int UNIQUE,
     FOREIGN KEY(bleader) REFERENCES menbert(mno),
 );
@@ -22,7 +22,7 @@ CREATE table bandt(
 CREATE table albumt(
     ano int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     aname varchar(30),
-    apublishtime date(4) between '1800-01-01' and '9999-12-31',
+    apublishtime date,
     aband int,
     FOREIGN KEY(aband) REFERENCES bandt(bno)
 );
