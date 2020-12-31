@@ -30,61 +30,46 @@ INSERT INTO menbert(mno,mname,mjointime,mleavetime) VALUES (NULL,'泽部椿','20
 INSERT INTO menbert(mno,mname,mjointime,mleavetime) VALUES (NULL,'渡亮太','2014-10-09',NULL);
 
 -- 插入乐队数据
--- 需要先查询到 队长id 才能插，有点麻烦
+-- 需要先查询到 队长id 才能插
 -- 平沢唯
-
 INSERT INTO bandt(bno,bname,bfound,bleader) VALUES(NULL,'kon','2009-04-02',1);
 -- 黄前久美子
-
 INSERT INTO bandt(bno,bname,bfound,bleader) VALUES(NULL,'Euphonium','2015-06-30',6);
 -- 户山香澄
-
 INSERT INTO bandt(bno,bname,bfound,bleader) VALUES(NULL,'BanG','2019-01-03',11);
 -- 北原春希
-
 INSERT INTO bandt(bno,bname,bfound,bleader) VALUES(NULL,'WHITE','2013-10-05',17);
 -- 有马公生
-
 INSERT INTO bandt(bno,bname,bfound,bleader) VALUES(NULL,'April','2014-10-09',18);
 
 -- 插入专辑数据
--- 需要先查询到 乐队id 才能插，有点麻烦
--- 
+-- 需要先查询到 乐队id 才能插
 
 INSERT INTO albumt(ano,aname,apublishtime,aband)VALUES(NULL,'konmusic','2009-04-02',1);
--- 
 
 INSERT INTO albumt(ano,aname,apublishtime,aband)VALUES(NULL,'Euphoniummusic','2015-06-30',2);
--- 
 
 INSERT INTO albumt(ano,aname,apublishtime,aband)VALUES(NULL,'BanGmusic','2019-01-03',3);
--- 
 
 INSERT INTO albumt(ano,aname,apublishtime,aband)VALUES(NULL,'WHITEmusic','2013-10-05',4);
--- 
 
 INSERT INTO albumt(ano,aname,apublishtime,aband)VALUES(NULL,'Aprilmusic','2014-10-09',5);
 
 -- 插入歌曲数据
 -- 需要先查询到 专辑id 才能插
--- 
 
 INSERT INTO songst(sno,sname,sablum)VALUES(NULL,'song1',5);
--- 
 
 INSERT INTO songst(sno,sname,sablum)VALUES(NULL,'song2',4);
--- 
 
 INSERT INTO songst(sno,sname,sablum)VALUES(NULL,'song3',3);
--- 
 
 INSERT INTO songst(sno,sname,sablum)VALUES(NULL,'song4',2);
--- 
 
 INSERT INTO songst(sno,sname,sablum)VALUES(NULL,'song5',1);
 
 -- 插入歌迷数据
--- 
+
 INSERT INTO fanst(fno,fname,fsex,fage)VALUES(NULL,'安德烈','male',28);
 INSERT INTO fanst(fno,fname,fsex,fage)VALUES(NULL,'武田绫乃','female',18);
 INSERT INTO fanst(fno,fname,fsex,fage)VALUES(NULL,'藤本树','male',9);
