@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>所有的 {{ dtype }}:)</h1>
+    <h4>总共 {{ result|length }} {{dtype}}:</h4>
+    {% if dtype == 'bands' %}
+        <h5>乐队名：</h5>
+        {% for resl in result %}
+            <ul>
+                <li><a href="{{url_for('detail_bands',band_id=resl.bno)}}">
+                    {{resl.bname}}</a></li>
+            </ul>
+        {% endfor %}
+    {% elif dtype == 'singers' %}
+        <h5>歌手名：</h5>
+        {% for resl in result %}
+            <ul>
+                <li><a href="{{url_for('detail_singers',singer_id=resl.mno)}}">
+                    {{resl.mname}}</a></li>
+            </ul>
+        {% endfor %}
+    {% elif dtype == 'ablums' %}
+        <h5>专辑名：</h5>
+        {% for resl in result %}
+            <ul>
+                <li><a href="{{url_for('detail_ablums',ablum_id=resl.ano)}}">
+                    {{resl.aname}}</a></li>
+            </ul>
+        {% endfor %}
+    {% elif dtype == 'songs' %}
+        <h5>歌曲名：</h5>
+        {% for resl in result %}
+            <ul>
+                <li><a href="{{url_for('detail_songs',song_id=resl.sno)}}">
+                    {{resl.sname}}</a></li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

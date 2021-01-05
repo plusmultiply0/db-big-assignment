@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <div class="desc">
+            <h1>点击下面的链接，查看相关信息</h1>
+            <ul>
+                <li>
+                    <a href="{{ url_for('all_bands') }}">所有的乐队</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('all_singers') }}">所有的歌手</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('all_ablums') }}">所有的专辑</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('all_songs') }}">所有的歌曲</a>
+                </li>
+            </ul>
+        </div>
+        <div class="fandetail">
+
+        </div>
+    </div>
+{% endblock %}

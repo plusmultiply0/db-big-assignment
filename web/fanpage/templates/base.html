@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <title>{% block title %}Fans Page{% endblock %}</title>
+        {% block styles %}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+
+    <header>
+        <ul>
+            <li>
+                <a href="{{ url_for('index')}}">Home</a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+

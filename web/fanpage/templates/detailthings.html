@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% from 'macros.html' import returnback %}
+
+{% block content %}
+    <h1>{{ dtype }}:)</h1>
+{% if dtype == 'bands' %}
+    {{returnback('all_bands')}}
+    <h3>{{result.bname}}的详细信息：</h3>
+    <ul>
+        <li><span>成立时间：</span><span>{{result.bfound}}</span></li>
+        <li><span>乐队队长：</span><span>{{leader.mname}}</span></li>
+    </ul>
+{% elif dtype == 'singers' %}
+    {{returnback('all_singers')}}
+    <h3>{{result.mname}}的详细信息：</h3>
+    <ul>
+        <li><span>加入乐队时间：</span><span>{{result.mjointime}}</span></li>
+        <li><span>退出乐队时间：</span><span>{{result.mleavetime|default('暂无')}}</span></li>
+    </ul>
+{% elif dtype == 'ablums' %}
+    {{returnback('all_ablums')}}
+    <h3>{{result.aname}}的详细信息：</h3>
+    <ul>
+        <li><span>发布时间：</span><span>{{result.apublishtime}}</span></li>
+        <li><span>所属乐队：</span><span>{{band.bname}}</span></li>
+    </ul>
+{% elif dtype == 'songs' %}
+    {{returnback('all_songs')}}
+    <h3>{{result.sname}}的详细信息：</h3>
+    <ul>
+        <li><span>所属专辑：</span><span>{{sablum.aname}}</span></li>
+    </ul>
+{% endif %}
+
+{% endblock %}

@@ -33,7 +33,7 @@ songfans_table = db.Table('songfanst',
 class menbert(db.Model):
     mno=db.Column(db.Integer,primary_key=True,nullable=False,autoincrement=True)
     mname=db.Column(db.String(20))
-    mjointime=db.Column(db.String(30))
+    mjointime=db.Column(db.DateTime)
     mleavetime=db.Column(db.String(30))
     # 定义双向关系
     # 成员与粉丝多对多√
