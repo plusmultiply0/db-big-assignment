@@ -18,3 +18,6 @@ class LoginForm(FlaskForm):
                 flag=True
         if not flag:
             raise ValidationError('用户名（粉丝名）不存在！')
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField('Delete')

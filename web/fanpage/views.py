@@ -1,9 +1,10 @@
-from flask import flash, redirect, url_for, render_template,session
+from flask import flash, redirect, url_for, render_template\
+    ,session,abort
 
 from fanpage import app,db
 from fanpage.models import menbert,bandt,albumt,songst,fanst,bandmenbert
 
-from fanpage.forms import LoginForm
+from fanpage.forms import LoginForm,DeleteForm
 
 
 
@@ -18,8 +19,13 @@ def index(fans_name=''):
         memberlike = fan.memberfanst
         ablumlike = fan.ablumfanst
         songlike = fan.songfanst
+        deleteband = DeleteForm()
+        deletemember = DeleteForm()
+        deleteablum = DeleteForm()
+        deletesong = DeleteForm()
         return render_template('index.html',fan=fan,bandlike=bandlike,memberlike=memberlike
-                           ,ablumlike=ablumlike,songlike=songlike)
+                           ,ablumlike=ablumlike,songlike=songlike
+        ,deleteband=deleteband,deletemember=deletemember,deleteablum=deleteablum,deletesong=deletesong)
     return render_template('index.html')
 
 # 所有的*
@@ -86,3 +92,53 @@ def fan_login():
         return redirect(url_for('index',fans_name=username))
     fans = fanst.query.all()
     return render_template('login.html',fans=fans,form=form)
+
+# CRUD
+# 删除
+@app.route('/<string:fans_name>/bands/delete/<int:band_id>', methods=['POST'])
+def delete_bands(fans_name,band_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        band = bandt.query.get(band_id)
+        fan = fanst.query.filter(fanst.fname == fans_name)[0]
+        fan.bandfanst.remove(band)
+        db.session.commit()
+    else:
+        abort(400)
+    return redirect(url_for('index',fans_name=fans_name))
+
+@app.route('/<string:fans_name>/singers/delete/<int:singer_id>', methods=['POST'])
+def delete_singers(fans_name,singer_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        singer = menbert.query.get(singer_id)
+        fan = fanst.query.filter(fanst.fname == fans_name)[0]
+        fan.memberfanst.remove(singer)
+        db.session.commit()
+    else:
+        abort(400)
+    return redirect(url_for('index',fans_name=fans_name))
+
+@app.route('/<string:fans_name>/ablums/delete/<int:ablum_id>', methods=['POST'])
+def delete_ablums(fans_name,ablum_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        album = albumt.query.get(ablum_id)
+        fan = fanst.query.filter(fanst.fname == fans_name)[0]
+        fan.ablumfanst.remove(album)
+        db.session.commit()
+    else:
+        abort(400)
+    return redirect(url_for('index',fans_name=fans_name))
+
+@app.route('/<string:fans_name>/songs/delete/<int:song_id>', methods=['POST'])
+def delete_songs(fans_name,song_id):
+    form = DeleteForm()
+    if form.validate_on_submit():
+        song = songst.query.get(song_id)
+        fan = fanst.query.filter(fanst.fname == fans_name)[0]
+        fan.songfanst.remove(song)
+        db.session.commit()
+    else:
+        abort(400)
+    return redirect(url_for('index',fans_name=fans_name))

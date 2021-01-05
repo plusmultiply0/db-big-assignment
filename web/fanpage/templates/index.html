@@ -29,28 +29,48 @@
                 <h4>喜欢的乐队：</h4>
                 <ul>{% for band in bandlike %}
                 <li><a href="{{url_for('detail_bands',band_id=band.bno)}}">
-                    {{band.bname}}</a></li>{% endfor %}
+                    {{band.bname}}</a>
+                    <form method="post" action="{{url_for('delete_bands',band_id=band.bno,fans_name=fan.fname)}}">
+                        {{ deleteband.csrf_token }}
+                        {{ deleteband.submit }}
+                    </form>
+                </li>{% endfor %}
                 </ul>
             </div>
-                <div>
+            <div>
                 <h4>喜欢的乐队成员：</h4>
                 <ul>{% for member in memberlike %}
                 <li><a href="{{url_for('detail_singers',singer_id=member.mno)}}">
-                    {{member.mname}}</a></li>{% endfor %}
+                    {{member.mname}}</a>
+                    <form method="post" action="{{url_for('delete_singers',singer_id=member.mno,fans_name=fan.fname)}}">
+                        {{ deletemember.csrf_token }}
+                        {{ deletemember.submit }}
+                    </form>
+                </li>{% endfor %}
                 </ul>
             </div>
                 <div>
                 <h4>喜欢的专辑：</h4>
                 <ul>{% for ablum in ablumlike %}
                 <li><a href="{{url_for('detail_ablums',ablum_id=ablum.ano)}}">
-                    {{ablum.aname}}</a></li>{% endfor %}
+                    {{ablum.aname}}</a>
+                    <form method="post" action="{{url_for('delete_ablums',ablum_id=ablum.ano,fans_name=fan.fname)}}">
+                        {{ deleteablum.csrf_token }}
+                        {{ deleteablum.submit }}
+                    </form>
+                </li>{% endfor %}
                 </ul>
             </div>
                 <div>
                 <h4>喜欢的歌曲：</h4>
                 <ul>{% for song in songlike %}
                 <li><a href="{{url_for('detail_songs',song_id=song.sno)}}">
-                    {{song.sname}}</a></li>{% endfor %}
+                    {{song.sname}}</a>
+                    <form method="post" action="{{url_for('delete_songs',song_id=song.sno,fans_name=fan.fname)}}">
+                        {{ deletesong.csrf_token }}
+                        {{ deletesong.submit }}
+                    </form>
+                </li>{% endfor %}
                 </ul>
             </div>
             {% endif %}
