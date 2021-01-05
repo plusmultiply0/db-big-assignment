@@ -33,15 +33,11 @@ songfans_table = db.Table('songfanst',
 class menbert(db.Model):
     mno=db.Column(db.Integer,primary_key=True,nullable=False,autoincrement=True)
     mname=db.Column(db.String(20))
-    mjointime=db.Column(db.DateTime)
-    mleavetime=db.Column(db.DateTime)
+    mjointime=db.Column(db.String(30))
+    mleavetime=db.Column(db.String(30))
     # 定义双向关系
-    # 乐队与队长一对一
-    mbandleader=db.relationship('bandt',back_populates='bandleader',)
-    # 出于方便，这里和sql定义表不一样，成员表多了个所属乐队的外码（原先是乐队成员关系表）
-    mband = db.Column(db.Integer,db.ForeignKey('bandt.bno'))
-    # 乐队与成员一对多
-    bandmenbert=db.relationship('bandt',back_populates='bandmenbert')
+    # 成员与粉丝多对多√
+    memberfanst = db.relationship('fanst', secondary=memberfans_table, back_populates='memberfanst')
 
 # 乐队表
 class bandt(db.Model):
@@ -50,14 +46,12 @@ class bandt(db.Model):
     bfound=db.Column(db.DateTime)
     bleader=db.Column(db.Integer,db.ForeignKey('menbert.mno'),unique=True)
     # 定义双向关系
-    # 乐队与队长一对一
-    bandleader=db.relationship('menbert',back_populates='mbandleader',uselist=False)
-    # 专辑与乐队一对一
+    # 专辑与乐队一对一√
     albumown=db.relationship('albumt',back_populates='albumbelong',uselist=False)
-    # 歌曲和乐队多对多关系
+    # 歌曲和乐队多对多关系√
     playst = db.relationship('songst',secondary=playst_table,back_populates='playst')
-    # 乐队与成员一对多
-    bandmenbert = db.relationship('menbert', back_populates='bandmenbert')
+    # 乐队与粉丝多对多√
+    bandfanst = db.relationship('fanst',secondary=bandfans_table,back_populates='bandfanst')
 
 # 专辑表
 class albumt(db.Model):
@@ -66,10 +60,12 @@ class albumt(db.Model):
     apublishtime=db.Column(db.DateTime)
     aband=db.Column(db.Integer,db.ForeignKey('bandt.bno'),)
     # 定义双向关系
-    # 专辑与乐队一对一
+    # 专辑与乐队一对一√
     albumbelong=db.relationship('bandt',back_populates='albumown')
-    # 专辑与歌曲一对一
+    # 专辑与歌曲一对一√
     songsown=db.relationship('songst',back_populates='songsbelong')
+    # 专辑与粉丝多对多√
+    ablumfanst = db.relationship('fanst', secondary=ablumfans_table, back_populates='ablumfanst')
 
 # 歌曲表
 class songst(db.Model):
@@ -77,10 +73,12 @@ class songst(db.Model):
     sname = db.Column(db.String(30))
     sablum =db.Column(db.Integer,db.ForeignKey('albumt.ano'))
     # 定义双向关系
-    # 专辑与歌曲一对一
+    # 专辑与歌曲一对一√
     songsbelong=db.relationship('albumt',back_populates='songsown')
-    # 歌曲和乐队多对多关系
+    # 歌曲和乐队多对多关系√
     playst = db.relationship('bandt',secondary=playst_table,back_populates='playst')
+    # 歌曲与粉丝多对多√
+    songfanst = db.relationship('fanst', secondary=songfans_table, back_populates='songfanst')
 
 # 歌迷表
 class fanst(db.Model):
@@ -89,5 +87,19 @@ class fanst(db.Model):
     fsex = db.Column(db.String(10))
     # 忽略了一个约束条件fage<=200 AND fage>=000
     fage=db.Column(db.Integer)
+    # 乐队与粉丝多对多√
+    bandfanst = db.relationship('bandt',secondary=bandfans_table,back_populates='bandfanst')
+    # 成员与粉丝多对多√
+    memberfanst = db.relationship('menbert', secondary=memberfans_table, back_populates='memberfanst')
+    # 专辑与粉丝多对多√
+    ablumfanst = db.relationship('albumt', secondary=ablumfans_table, back_populates='ablumfanst')
+    # 歌曲与粉丝多对多√
+    songfanst = db.relationship('songst', secondary=songfans_table, back_populates='songfanst')
 
+# -----------------------------
+# 成员乐队关系表
+class bandmenbert(db.Model):
+    id = db.Column(db.Integer,primary_key=True,nullable=False,autoincrement=True)
+    bno = db.Column(db.Integer,db.ForeignKey('bandt.bno'))
+    mno = db.Column(db.Integer,db.ForeignKey('menbert.mno'),unique=True)
 
