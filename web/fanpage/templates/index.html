@@ -20,7 +20,40 @@
             </ul>
         </div>
         <div class="fandetail">
-
+            {% if fan %}
+                <h1>详情页</h1>
+                <h3>粉丝姓名：{{ fan.fname }}</h3>
+                <h4>性别：{{ fan.fsex }}</h4>
+                <h4>年龄：{{ fan.fage }}</h4>
+                <div>
+                <h4>喜欢的乐队：</h4>
+                <ul>{% for band in bandlike %}
+                <li><a href="{{url_for('detail_bands',band_id=band.bno)}}">
+                    {{band.bname}}</a></li>{% endfor %}
+                </ul>
+            </div>
+                <div>
+                <h4>喜欢的乐队成员：</h4>
+                <ul>{% for member in memberlike %}
+                <li><a href="{{url_for('detail_singers',singer_id=member.mno)}}">
+                    {{member.mname}}</a></li>{% endfor %}
+                </ul>
+            </div>
+                <div>
+                <h4>喜欢的专辑：</h4>
+                <ul>{% for ablum in ablumlike %}
+                <li><a href="{{url_for('detail_ablums',ablum_id=ablum.ano)}}">
+                    {{ablum.aname}}</a></li>{% endfor %}
+                </ul>
+            </div>
+                <div>
+                <h4>喜欢的歌曲：</h4>
+                <ul>{% for song in songlike %}
+                <li><a href="{{url_for('detail_songs',song_id=song.sno)}}">
+                    {{song.sname}}</a></li>{% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

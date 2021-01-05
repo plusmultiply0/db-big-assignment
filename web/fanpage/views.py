@@ -1,10 +1,25 @@
-from flask import flash, redirect, url_for, render_template
+from flask import flash, redirect, url_for, render_template,session
 
 from fanpage import app,db
 from fanpage.models import menbert,bandt,albumt,songst,fanst,bandmenbert
 
+from fanpage.forms import LoginForm
+
+
+
+@app.route('/<string:fans_name>',methods=['GET', 'POST'])
 @app.route('/',methods=['GET', 'POST'])
-def index():
+def index(fans_name=''):
+    fan=''
+    if fans_name:
+        fan = fanst.query.filter(fanst.fname == fans_name)[0]
+    if fan:
+        bandlike = fan.bandfanst
+        memberlike = fan.memberfanst
+        ablumlike = fan.ablumfanst
+        songlike = fan.songfanst
+        return render_template('index.html',fan=fan,bandlike=bandlike,memberlike=memberlike
+                           ,ablumlike=ablumlike,songlike=songlike)
     return render_template('index.html')
 
 # 所有的*
@@ -61,3 +76,13 @@ def detail_songs(song_id):
     result = songst.query.get(song_id)
     sablum = albumt.query.get(result.sablum)
     return render_template('detailthings.html',result=result,dtype=dtype,sablum=sablum)
+
+# 登录
+@app.route('/login',methods=['GET','POST'])
+def fan_login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        return redirect(url_for('index',fans_name=username))
+    fans = fanst.query.all()
+    return render_template('login.html',fans=fans,form=form)
