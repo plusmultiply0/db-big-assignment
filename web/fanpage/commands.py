@@ -1,5 +1,4 @@
 import click
-from datetime import datetime
 
 from fanpage import app,db
 from fanpage.models import menbert,bandt,albumt,songst,fanst,bandmenbert

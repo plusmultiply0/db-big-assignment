@@ -1,12 +1,8 @@
-from flask import flash, redirect, url_for, render_template\
-    ,session,abort
+from flask import redirect, url_for, render_template,abort
 
 from fanpage import app,db
-from fanpage.models import menbert,bandt,albumt,songst,fanst,bandmenbert
-
+from fanpage.models import menbert,bandt,albumt,songst,fanst
 from fanpage.forms import LoginForm,DeleteForm
-
-
 
 @app.route('/<string:fans_name>',methods=['GET', 'POST'])
 @app.route('/',methods=['GET', 'POST'])

@@ -17,7 +17,7 @@ class LoginForm(FlaskForm):
             if i.fname == field.data:
                 flag=True
         if not flag:
-            raise ValidationError('用户名（粉丝名）不存在！')
+            raise ValidationError('用户名（歌迷名）不存在！')
 
 class DeleteForm(FlaskForm):
     submit = SubmitField('Delete')
