@@ -1,7 +1,15 @@
 import click
-
 from fanpage import app,db
 from fanpage.models import menbert,bandt,albumt,songst,fanst,bandmenbert
+
+# 自定义flask命令
+# 定义建库，和填充库数据的命令
+# 建库
+# flask initdb
+# 建表
+# flask build
+# 运行
+# flask run
 
 #python shell上下文
 @app.shell_context_processor

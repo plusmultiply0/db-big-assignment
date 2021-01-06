@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField,SubmitField
 from wtforms.validators import DataRequired,ValidationError
-
 from fanpage.models import fanst
+
+# 表单文件
 
 class LoginForm(FlaskForm):
     username = StringField('用户名(粉丝名)', validators=[DataRequired()])

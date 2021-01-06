@@ -4,6 +4,9 @@ from fanpage import app,db
 from fanpage.models import menbert,bandt,albumt,songst,fanst
 from fanpage.forms import LoginForm,DeleteForm
 
+# 视图文件
+# 不同的url端点，对应不同的视图函数，渲染不同的模板
+
 @app.route('/<string:fans_name>',methods=['GET', 'POST'])
 @app.route('/',methods=['GET', 'POST'])
 def index(fans_name=''):
