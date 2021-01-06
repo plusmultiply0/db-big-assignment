@@ -1,6 +1,7 @@
 from fanpage import db
-
+# 数据库模型建立与sql语句定义的基本相同
 # 关系表----------------------------------------
+# 关系定义好后，sqlalchemy 会自动为我们维护关系表
 # 歌曲和乐队多对多关系
 playst_table = db.Table('playst',
                         db.Column('bno',db.Integer,db.ForeignKey('bandt.bno')),

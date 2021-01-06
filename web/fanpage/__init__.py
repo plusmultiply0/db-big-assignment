@@ -10,4 +10,4 @@ app.jinja_env.lstrip_blocks=True
 
 db=SQLAlchemy(app)
 
-from fanpage import views,errors,commands
+from fanpage import views,commands
