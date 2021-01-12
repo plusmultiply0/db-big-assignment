@@ -9,7 +9,7 @@
 >   - 歌迷/不登录都可以查看所有的乐队、歌手、专辑、歌曲详细信息
 >   - 显示某歌迷页面，他所喜欢的乐队、歌手、专辑、歌曲，可以点开每一行查看详细信息
 >
->主要是提供一个在线地址用于浏览和实现代码和项目:P
+>主要是提供一个在线地址用于浏览代码和项目:P
 ## 项目结构
 ```
 web/                               #项目文件夹名
@@ -38,8 +38,8 @@ web/                               #项目文件夹名
 ## 如何使用本项目
 1. 下载项目文件
     ```
-    下载zip文件或者
-    git clone https://github.com/plusmultiply0/db-big-assignment.git
+    点击中间偏右侧的 绿色code按钮 下载zip文件或者使用命令下载
+    git clone https://github.com/plusmultiply0/db-big-assignment.git （需要先安装好Git）
     ```
 2. 安装虚拟环境(web目录下的命令行)
     ```bash
@@ -51,8 +51,7 @@ web/                               #项目文件夹名
     pip install -r requirements.txt #根据依赖表安装，建议安装前切换国内镜像源
     ```
 4. 新建隐私环境变量文件
-    web文件夹下，新建一个名为.env的文件
-    然后，填入如下的内容
+    web文件夹下，新建一个名为 .env 的文件。然后，填入如下的内容
     ```
     DATABASE_URL=mysql+pymysql://root:123456@localhost:3306/webdb
     ```
@@ -66,10 +65,12 @@ web/                               #项目文件夹名
     flask initdb
     # 往数据库填充数据
     flask build
-    # 运行项目于 http://127.0.0.1:5000/（打开浏览器其输入此地址）
+    # 运行项目于 http://127.0.0.1:5000/（打开浏览器输入此地址，就可以看到）
     flask run
     ```
 ## 最后
 按照此 README 的操作指示，应该是能成功跑起来的;)
 
 有问题欢迎提 [issue](https://github.com/plusmultiply0/db-big-assignment/issues) 或者 [email](kimzhou36@foxmail.com)
+
+觉得做的还可以的话，麻烦右上角点一下star:star:
